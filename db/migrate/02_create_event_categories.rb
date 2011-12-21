@@ -1,6 +1,6 @@
 class CreateEventCategories < ActiveRecord::Migration
   def self.up
-    create_table :event_categories do |t|
+    create_table Refinery::EventCategory.table_name do |t|
       t.string :name
 
       t.timestamps
@@ -8,6 +8,6 @@ class CreateEventCategories < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :event_categories
+    drop_table Refinery::EventCategory.table_name
   end
 end

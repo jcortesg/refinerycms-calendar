@@ -1,17 +1,17 @@
 class CreateEventCategorizations < ActiveRecord::Migration
   def self.up
-    create_table :event_categorizations do |t|
+    create_table Refinery::EventCategorization.table_name do |t|
       t.integer :event_id
       t.integer :event_category_id
       
       t.timestamps
     end
     
-    add_index :event_categorizations, :event_id
-    add_index :event_categorizations, :event_category_id
+    add_index Refinery::EventCategorization.table_name, :event_id
+    add_index Refinery::EventCategorization.table_name, :event_category_id
   end
 
   def self.down
-    drop_table :event_categorizations
+    drop_table Refinery::EventCategorization.table_name
   end
 end

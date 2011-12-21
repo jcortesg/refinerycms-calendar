@@ -1,7 +1,7 @@
 class CreateEvents < ActiveRecord::Migration
 
   def self.up
-    create_table :events do |t|
+    create_table Refinery::Event.table_name, :id => true do |t|
       t.string :title
       t.datetime :start_at
       t.datetime :end_at
@@ -17,9 +17,9 @@ class CreateEvents < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :events, :id
+    add_index Refinery::Event.table_name, :id
 
-    load(Rails.root.join('db', 'seeds', 'events.rb'))
+	Refinery::Calendar::Engine.load_seed
   end
 
   def self.down
@@ -27,7 +27,7 @@ class CreateEvents < ActiveRecord::Migration
 
     Page.delete_all({:link_url => "/events"})
 
-    drop_table :events
+    drop_table Refinery::Event.table_name
   end
 
 end

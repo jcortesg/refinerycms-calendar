@@ -1,13 +1,13 @@
-Refinery::Application.routes.draw do
-  resources :events do
-    collection do
-      get 'archive/:year(/:month)' => 'events#archive', :as => 'archive'
-      get 'category/:id' => 'event_categories#show', :as => 'category'
+Rails.application.routes.draw do
+  scope(:module => 'refinery') do
+    resources :events, :only => [:index, :show] do
+      get 'archive/:year(/:month)' => 'events#archive', :as => 'archive',  :on => :collection
+      get 'category/:id' => 'event_categories#show',    :as => 'category', :on => :collection
     end
-  end
-  
-  scope(:path => 'refinery', :as => 'admin', :module => 'admin') do
-    resources :events, :except => :show
-    resources :event_categories, :except => :show
+
+    scope(:path => 'refinery', :as => 'refinery_admin', :module => 'admin') do
+      resources :events, :except => :show
+      resources :event_categories,  :except => :show
+    end
   end
 end

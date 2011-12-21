@@ -1,0 +1,40 @@
+<div id='records'>
+  <% if searching? %>
+    <h2><%= t('results_for', :scope => 'shared.admin.search', :query => params[:search]) %></h2>
+  <% end %>
+  <% if @event_categories.any? %>
+    <div class='pagination_container'>
+      <%= render :partial => 'event_categories' %>
+    </div>
+  <% else %>
+    <p>
+      <% unless searching? %>
+        <strong>
+          <%= t('.no_items_yet') %>
+        </strong>
+      <% else %>
+        <%= t('no_results', :scope => 'shared.admin.search') %>
+      <% end %>
+    </p>
+  <% end %>
+</div>
+<div id='actions'>
+  <ul>
+    <% if ::Refinery::Admin::EventCategoriesController.searchable? %>
+      <li>
+        <%= render :partial => "/refinery/admin/search",
+                    :locals => {
+                      :url => main_app.refinery_admin_event_categories_url
+                    } %>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to t('.create_new'), main_app.new_refinery_admin_event_category_url,
+                   :class => "add_icon" %>
+    </li>
+    <li>
+      <%= link_to t('.manage_events'), main_app.refinery_admin_events_url,
+                   :class => "edit_icon" %>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,15 @@
+<% content_for :body_content_title do -%>
+  <%= "#{@event_category.name} Category" %>
+<% end -%>
+
+<% content_for :body_content_left do %>
+  <div id="events">
+		<%= render :partial => '/refinery/events/event', :collection => @event_category.events, :locals => { :category => true } %>
+	</div><!-- #events -->
+<% end %>
+
+<%= render '/refinery/events/sidebar' %>
+
+<%= render :partial => "/refinery/content_page" %>
+
+<% content_for :stylesheets, stylesheet_link_tag('refinerycms-events') %>

@@ -1,0 +1,17 @@
+<% content_for :body_content_left do %>
+	<div id="featured_events" class="events">
+		<h2><%= t('.featured_events') %></h2>
+		<%= render :partial => 'event', :collection => @featured_events, :locals => { :featured => true } %>
+	</div>
+	
+  <div id="all_events" class="events">
+		<h2><%= t('.all_events') %></h2>
+		<%= render :partial => 'event', :collection => @events %>
+	</div>
+<% end %>
+
+<%= render '/refinery/events/sidebar' %>
+
+<%= render :partial => "/refinery/content_page" %>
+
+<% content_for :stylesheets, stylesheet_link_tag('refinerycms-events') %>
